@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro del Pentagrama | Edición Definitiva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Super Pentagrama - Misión Clave de Sol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;900&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Music&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #f4f4f9;
+            /* Colores inspirados en Mario y Super Ritmo */
+            --bg-color: #fff9c4; 
             --surface: #ffffff;
+            --text-main: #2c3e50;
             --primary: #2c3e50;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --success: #10b981;
-            --error: #ef4444;
-            --staff-lines: #1e293b;
+            --accent: #049CD8;   /* Azul Mario */
+            --accent-hover: #0082c3;
+            --success: #43B047; /* Verde Mario */
+            --error: #E52521;   /* Rojo Mario */
+            --staff-lines: #000000;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
-            color: var(--primary);
+            background-image: radial-gradient(#fff176 15%, transparent 15%);
+            background-size: 30px 30px;
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -36,32 +40,69 @@
         .app-container {
             background: var(--surface);
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            box-shadow: 0 20px 0px #fbc02d, 0 25px 40px rgba(0,0,0,0.1);
+            border: 5px solid #fff;
+            border-bottom: 12px solid #ffb300;
+            border-bottom-right-radius: 60px;
             width: 100%;
             max-width: 800px;
             text-align: center;
+            position: relative;
         }
 
-        h1 { font-weight: 800; font-size: 2.2rem; margin-bottom: 0.5rem; }
-        p.subtitle { color: #64748b; margin-bottom: 2.5rem; font-size: 1.1rem; }
+        /* --- TÍTULO ESTILO SUPER MARIO --- */
+        h1.mario-title { 
+            font-family: 'Fredoka', sans-serif; 
+            font-weight: 900; 
+            font-size: 4.2rem; 
+            margin-bottom: 0.5rem; 
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-shadow: 
+                -4px -4px 0 #000,  
+                 4px -4px 0 #000,
+                -4px  4px 0 #000,
+                 4px  4px 0 #000,
+                 0px  6px 0 #000,
+                 0px 15px 10px rgba(0,0,0,0.3);
+        }
 
-        /* --- MOTOR GRÁFICO DEL PENTAGRAMA (CSS/DOM) --- */
+        .mario-title span { display: inline-block; }
+        .mario-title span:nth-child(even) { transform: rotate(3deg) translateY(-3px); }
+        .mario-title span:nth-child(odd) { transform: rotate(-3deg) translateY(3px); }
+
+        .m-red { color: #E52521; }
+        .m-blue { color: #049CD8; }
+        .m-yellow { color: #FBD000; }
+        .m-green { color: #43B047; }
+
+        p.subtitle { 
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            color: #546e7a; 
+            margin-top: 10px;
+            margin-bottom: 2.5rem; 
+            font-size: 1.3rem; 
+        }
+
+        /* --- MOTOR GRÁFICO DEL PENTAGRAMA --- */
         .staff-container {
             position: relative;
             width: 100%;
             height: 200px;
-            background: #fff;
+            background: transparent;
             margin: 0 auto 3rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            /* ¡Borde y sombra eliminados para evitar confusiones! */
         }
 
         .staff-lines {
             position: relative;
             width: 80%;
-            height: 120px; /* 4 espacios de 30px = 120px */
+            height: 120px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -69,48 +110,46 @@
 
         .line {
             width: 100%;
-            height: 2px;
+            height: 3px; 
             background-color: var(--staff-lines);
             position: relative;
             z-index: 1;
         }
 
-        /* Clave de Sol tipográficamente perfecta */
         .clef {
             position: absolute;
             font-family: 'Noto Music', sans-serif;
             font-size: 140px;
             left: 10px;
             top: 50%;
-            transform: translateY(-53%); /* Ajuste fino para centrar la espiral en la línea de SOL */
+            transform: translateY(-53%); 
             color: var(--staff-lines);
             z-index: 2;
             user-select: none;
         }
 
-        /* La Nota Musical */
         .note {
             position: absolute;
-            left: 200px; /* Posición X fija */
-            width: 24px;
-            height: 18px;
+            left: 220px;
+            width: 26px; 
+            height: 20px;
             background-color: #000;
             border-radius: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             z-index: 3;
-            transition: top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Animación de rebote suave */
+            transition: top 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid #000; 
         }
 
-        /* Línea adicional (Ledger line) dinámica */
         .ledger-line {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(15deg); /* Modificado para anular los -15deg del padre */
-            width: 40px;
-            height: 2px;
+            transform: translate(-50%, -50%) rotate(15deg);
+            width: 44px;
+            height: 3px;
             background-color: var(--staff-lines);
-            display: none; /* Se activa vía JS */
+            display: none;
             z-index: -1;
         }
 
@@ -118,49 +157,55 @@
         .controls {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 2rem;
+            padding: 0 10px;
         }
 
         @media (max-width: 600px) {
             .controls { grid-template-columns: repeat(4, 1fr); }
-            .note { left: 150px; }
+            .note { left: 160px; }
             .staff-lines { width: 95%; }
+            h1.mario-title { font-size: 3rem; }
         }
 
         .btn-note {
-            padding: 15px 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            background: transparent;
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            color: var(--primary);
+            font-family: 'Fredoka', sans-serif;
+            padding: 18px 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background-color: var(--accent); 
+            color: white;
+            border: 3px solid #000; 
+            border-radius: 50px; 
             cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
+            position: relative;
+            top: 0;
+            transition: all 0.1s;
+            text-shadow: 1px 1px 0 #000;
+            box-shadow: 0 6px 0px #000;
         }
 
         .btn-note:hover:not(:disabled) {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-            background: #f0f9ff;
+            background-color: var(--accent-hover);
+        }
+
+        .btn-note:active:not(:disabled) { 
+            top: 6px;
+            box-shadow: 0 0px 0px #000;
         }
 
         .btn-note:disabled { cursor: not-allowed; opacity: 0.8; }
         
-        /* Estados de respuesta */
         .btn-note.correct {
             background-color: var(--success);
-            border-color: var(--success);
+            border-color: #000;
             color: white;
-            transform: scale(1.05);
         }
 
         .btn-note.incorrect {
             background-color: var(--error);
-            border-color: var(--error);
+            border-color: #000;
             color: white;
             animation: shake 0.4s;
         }
@@ -170,18 +215,25 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        #score, #streak {
+            color: var(--accent);
         }
 
         .feedback-msg {
-            height: 30px;
-            font-size: 1.3rem;
-            font-weight: 800;
+            height: 35px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
             margin-bottom: 1rem;
             transition: opacity 0.3s;
             opacity: 0;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
         }
 
         .msg-success { color: var(--success); }
@@ -193,13 +245,28 @@
             50% { transform: translateX(5px); }
             75% { transform: translateX(-5px); }
         }
+
+        .credito-profesor {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #546e7a;
+            padding-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <h1>Entrenamiento Auditivo</h1>
-    <p class="subtitle">Identifica la nota en Clave de Sol</p>
+    <h1 class="mario-title">
+        <span class="m-red">S</span><span class="m-blue">U</span><span class="m-yellow">P</span><span class="m-green">E</span><span class="m-red">R</span><br>
+        <span class="m-green">P</span><span class="m-blue">E</span><span class="m-yellow">N</span><span class="m-red">T</span><span class="m-green">A</span><span class="m-blue">G</span><span class="m-red">R</span><span class="m-yellow">A</span><span class="m-green">M</span><span class="m-blue">A</span>
+    </h1>
+    <p class="subtitle">🍄 ¡Misión: Identifica la nota en Clave de Sol! ⭐</p>
 
     <div class="staff-container">
         <div class="staff-lines" id="staff">
@@ -216,31 +283,29 @@
     <div class="controls" id="btn-container"></div>
 
     <div class="stats">
-        <div>Puntuación: <span id="score">0</span></div>
-        <div>Racha: <span id="streak">0</span></div>
+        <div>💰 Puntuación: <span id="score">0</span></div>
+        <div>🔥 Racha: <span id="streak">0</span></div>
+    </div>
+
+    <div class="credito-profesor">
+        Creado por Profesor Matías Poblete
     </div>
 </div>
 
 <script>
-    /**
-     * LÓGICA INFALIBLE: Mapeo exacto de la nota a su posición en píxeles.
-     * El contenedor "staff-lines" tiene 120px de alto.
-     * Línea superior = 0px | Línea inferior = 120px.
-     * Cada paso (línea a espacio) son 15px.
-     */
     const MUSIC_DATA = [
-        { name: 'DO', top: 150, needsLedger: true },  // Do4 (Central, línea adicional abajo)
-        { name: 'RE', top: 135, needsLedger: false }, // Re4 (Debajo de la primera línea)
-        { name: 'MI', top: 120, needsLedger: false }, // Mi4 (1ra línea)
-        { name: 'FA', top: 105, needsLedger: false }, // Fa4 (1er espacio)
-        { name: 'SOL', top: 90, needsLedger: false }, // Sol4 (2da línea - Cruza la clave)
-        { name: 'LA', top: 75, needsLedger: false },  // La4 (2do espacio)
-        { name: 'SI', top: 60, needsLedger: false },  // Si4 (3ra línea)
-        { name: 'DO', top: 45, needsLedger: false },  // Do5 (3er espacio)
-        { name: 'RE', top: 30, needsLedger: false },  // Re5 (4ta línea)
-        { name: 'MI', top: 15, needsLedger: false },  // Mi5 (4to espacio)
-        { name: 'FA', top: 0, needsLedger: false },   // Fa5 (5ta línea)
-        { name: 'SOL', top: -15, needsLedger: false } // Sol5 (Arriba de la 5ta línea)
+        { name: 'DO', top: 150, needsLedger: true },  
+        { name: 'RE', top: 135, needsLedger: false }, 
+        { name: 'MI', top: 120, needsLedger: false }, 
+        { name: 'FA', top: 105, needsLedger: false }, 
+        { name: 'SOL', top: 90, needsLedger: false }, 
+        { name: 'LA', top: 75, needsLedger: false },  
+        { name: 'SI', top: 60, needsLedger: false },  
+        { name: 'DO', top: 45, needsLedger: false },  
+        { name: 'RE', top: 30, needsLedger: false },  
+        { name: 'MI', top: 15, needsLedger: false },  
+        { name: 'FA', top: 0, needsLedger: false },   
+        { name: 'SOL', top: -15, needsLedger: false } 
     ];
 
     const UI = {
@@ -256,7 +321,7 @@
         currentNote: null,
         score: 0,
         streak: 0,
-        isLocked: false // Evita múltiples clics mientras se evalúa
+        isLocked: false 
     };
 
     function initGame() {
@@ -275,7 +340,6 @@
     }
 
     function generateNextNote() {
-        // Elegir nota aleatoria que no sea igual a la anterior
         let nextNote;
         do {
             nextNote = MUSIC_DATA[Math.floor(Math.random() * MUSIC_DATA.length)];
@@ -283,10 +347,8 @@
 
         state.currentNote = nextNote;
 
-        // Animar la nota a su nueva posición
         UI.noteEl.style.top = `${nextNote.top}px`;
         
-        // Mostrar u ocultar la línea adicional
         UI.ledgerEl.style.display = nextNote.needsLedger ? 'block' : 'none';
         
         state.isLocked = false;
@@ -295,7 +357,7 @@
 
     function handleGuess(guessName, btnElement) {
         if (state.isLocked) return;
-        state.isLocked = true; // Bloquea el input
+        state.isLocked = true; 
 
         const isCorrect = (guessName === state.currentNote.name);
 
@@ -308,7 +370,6 @@
             state.streak = 0;
             btnElement.classList.add('incorrect');
             
-            // Highlight visual del botón correcto para aprendizaje
             const correctBtn = document.querySelector(`button[data-note="${state.currentNote.name}"]`);
             if (correctBtn) correctBtn.classList.add('correct');
             
@@ -318,7 +379,6 @@
         UI.score.textContent = state.score;
         UI.streak.textContent = state.streak;
 
-        // Esperar 1.5 segundos antes de pasar a la siguiente nota
         setTimeout(() => {
             UI.feedback.style.opacity = '0';
             generateNextNote();
@@ -326,8 +386,8 @@
     }
 
     function showFeedback(isSuccess) {
-        const msgsSuccess = ["¡Perfecto!", "¡Exacto!", "¡Muy bien!", "¡Excelente oído!"];
-        const msgsError = [`¡Casi! Era ${state.currentNote.name}`, `Revisa bien, era ${state.currentNote.name}`, `¡Atento! Esa nota es ${state.currentNote.name}`];
+        const msgsSuccess = ["¡Perfecto! ✨", "¡Exacto! ⭐", "¡Muy bien! 🍄", "¡Excelente oído! 🔥"];
+        const msgsError = [`¡Casi! Era ${state.currentNote.name} 😢`, `Revisa bien, era ${state.currentNote.name} 🧐`, `¡Atento! Esa nota es ${state.currentNote.name} 🍄`];
         
         const arr = isSuccess ? msgsSuccess : msgsError;
         UI.feedback.textContent = arr[Math.floor(Math.random() * arr.length)];
@@ -343,7 +403,6 @@
         });
     }
 
-    // Iniciar la aplicación
     initGame();
 
 </script>
