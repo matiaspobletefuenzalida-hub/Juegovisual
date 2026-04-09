@@ -9,7 +9,6 @@
     
     <style>
         :root {
-            /* Colores inspirados en Mario y Super Ritmo */
             --bg-color: #fff9c4; 
             --surface: #ffffff;
             --text-main: #2c3e50;
@@ -86,6 +85,61 @@
             font-size: 1.3rem; 
         }
 
+        /* --- PANTALLA DE INICIO / LOGIN --- */
+        .start-screen {
+            background: #f8f9fa;
+            border: 4px dashed #049CD8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .start-screen h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .start-screen input {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            padding: 10px 15px;
+            width: 80%;
+            max-width: 300px;
+            border: 3px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .start-screen input:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-start {
+            font-family: 'Fredoka', sans-serif;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-color: var(--success); 
+            color: white;
+            border: 3px solid #000; 
+            border-radius: 50px; 
+            cursor: pointer;
+            position: relative;
+            top: 0;
+            transition: all 0.1s;
+            text-shadow: 1px 1px 0 #000;
+            box-shadow: 0 6px 0px #000;
+        }
+
+        .btn-start:active:not(:disabled) { 
+            top: 6px;
+            box-shadow: 0 0px 0px #000;
+        }
+
+        .btn-start:disabled { background-color: #aaa; cursor: not-allowed; }
+
         /* --- MOTOR GRÁFICO DEL PENTAGRAMA --- */
         .staff-container {
             position: relative;
@@ -96,7 +150,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* ¡Borde y sombra eliminados para evitar confusiones! */
         }
 
         .staff-lines {
@@ -221,9 +274,7 @@
             margin-bottom: 1rem;
         }
 
-        #score, #streak {
-            color: var(--accent);
-        }
+        #score, #streak { color: var(--accent); }
 
         .feedback-msg {
             height: 35px;
@@ -268,23 +319,32 @@
     </h1>
     <p class="subtitle">🍄 ¡Misión: Identifica la nota en Clave de Sol! ⭐</p>
 
-    <div class="staff-container">
-        <div class="staff-lines" id="staff">
-            <div class="clef">&#x1D11E;</div>
-            
-            <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="note" id="active-note">
-                <div class="ledger-line" id="ledger-line"></div>
-            </div>
-        </div>
+    <div id="start-screen" class="start-screen">
+        <h2>Ingresa tu nombre para jugar</h2>
+        <input type="text" id="player-name" placeholder="Tu nombre y apellido..." required autocomplete="off">
+        <br>
+        <button id="btn-start" class="btn-start">▶ JUGAR ◀</button>
     </div>
 
-    <div class="feedback-msg" id="feedback">¡Bien hecho!</div>
+    <div id="game-area" style="display: none;">
+        <div class="staff-container">
+            <div class="staff-lines" id="staff">
+                <div class="clef">&#x1D11E;</div>
+                
+                <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="note" id="active-note">
+                    <div class="ledger-line" id="ledger-line"></div>
+                </div>
+            </div>
+        </div>
 
-    <div class="controls" id="btn-container"></div>
+        <div class="feedback-msg" id="feedback">¡Bien hecho!</div>
 
-    <div class="stats">
-        <div>💰 Puntuación: <span id="score">0</span></div>
-        <div>🔥 Racha: <span id="streak">0</span></div>
+        <div class="controls" id="btn-container"></div>
+
+        <div class="stats">
+            <div>💰 Puntuación: <span id="score">0</span></div>
+            <div>🔥 Racha: <span id="streak">0</span></div>
+        </div>
     </div>
 
     <div class="credito-profesor">
@@ -293,6 +353,55 @@
 </div>
 
 <script>
+    // --- LÓGICA DE FORMSUBMIT ---
+    const startScreen = document.getElementById('start-screen');
+    const gameArea = document.getElementById('game-area');
+    const btnStart = document.getElementById('btn-start');
+    const playerNameInput = document.getElementById('player-name');
+
+    btnStart.addEventListener('click', () => {
+        const playerName = playerNameInput.value.trim();
+        
+        if (!playerName) {
+            alert("¡Por favor, escribe tu nombre para comenzar la misión!");
+            return;
+        }
+
+        // Cambiamos el botón para mostrar que está cargando
+        btnStart.textContent = "Preparando nivel...";
+        btnStart.disabled = true;
+
+        // Enviamos el correo usando Fetch (AJAX) para no recargar la página
+        fetch("https://formsubmit.co/ajax/matias.poblete@slepcolchagua.cl", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                _subject: `Nuevo Jugador: ${playerName}`,
+                Mensaje: `¡El alumno ${playerName} acaba de entrar a jugar Super Pentagrama!`,
+                NombreDelJugador: playerName
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Éxito: Ocultamos el login, mostramos el juego e iniciamos
+            startScreen.style.display = 'none';
+            gameArea.style.display = 'block';
+            initGame();
+        })
+        .catch(error => {
+            // En caso de que falle el internet o haya error, igual le dejamos jugar
+            console.error("Error al enviar el correo", error);
+            startScreen.style.display = 'none';
+            gameArea.style.display = 'block';
+            initGame();
+        });
+    });
+
+
+    // --- LÓGICA DEL JUEGO (Original) ---
     const MUSIC_DATA = [
         { name: 'DO', top: 150, needsLedger: true },  
         { name: 'RE', top: 135, needsLedger: false }, 
@@ -327,6 +436,7 @@
     function initGame() {
         const notasUnicas = ['DO', 'RE', 'MI', 'FA', 'SOL', 'LA', 'SI'];
         
+        UI.btnContainer.innerHTML = ''; // Limpiar botones por si acaso
         notasUnicas.forEach(nota => {
             const btn = document.createElement('button');
             btn.className = 'btn-note';
@@ -402,8 +512,6 @@
             btn.classList.remove('correct', 'incorrect');
         });
     }
-
-    initGame();
 
 </script>
 </body>
