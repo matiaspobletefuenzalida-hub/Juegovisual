@@ -51,7 +51,6 @@
             position: relative;
         }
 
-        /* --- TÍTULO ESTILO SUPER MARIO --- */
         h1.mario-title { 
             font-family: 'Fredoka', sans-serif; 
             font-weight: 900; 
@@ -78,7 +77,6 @@
         .m-green { color: #43B047; }
 
         p.subtitle { 
-            font-family: 'Nunito', sans-serif;
             font-weight: 900;
             color: #546e7a; 
             margin-top: 10px;
@@ -86,19 +84,12 @@
             font-size: 1.3rem; 
         }
 
-        /* --- PANTALLA DE INICIO / LOGIN --- */
         .start-screen {
             background: #f8f9fa;
             border: 4px dashed #049CD8;
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
-        }
-
-        .start-screen h2 {
-            font-family: 'Fredoka', sans-serif;
-            color: var(--text-main);
-            margin-bottom: 15px;
         }
 
         .start-screen input {
@@ -112,8 +103,6 @@
             margin-bottom: 15px;
             outline: none;
         }
-
-        .start-screen input:focus { border-color: var(--accent); }
 
         .btn-start {
             font-family: 'Fredoka', sans-serif;
@@ -133,15 +122,12 @@
         }
 
         .btn-start:active:not(:disabled) { top: 6px; box-shadow: 0 0px 0px #000; }
-        .btn-start:disabled { background-color: #aaa; cursor: not-allowed; }
 
-        /* --- MOTOR GRÁFICO DEL PENTAGRAMA --- */
         .staff-container {
             position: relative;
             width: 100%;
             height: 200px;
-            background: transparent;
-            margin: 0 auto 3rem auto;
+            margin-bottom: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -156,13 +142,7 @@
             justify-content: space-between;
         }
 
-        .line {
-            width: 100%;
-            height: 3px; 
-            background-color: var(--staff-lines);
-            position: relative;
-            z-index: 1;
-        }
+        .line { width: 100%; height: 3px; background-color: var(--staff-lines); z-index: 1; }
 
         .clef {
             position: absolute;
@@ -171,227 +151,73 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--staff-lines);
             z-index: 2;
-            user-select: none;
         }
 
         .note {
             position: absolute;
             left: 220px;
-            width: 28px; 
-            height: 22px;
+            width: 28px; height: 22px;
             background-color: #000;
             border-radius: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             z-index: 3;
-            transition: top 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s ease-out;
-            border: 2px solid #000;
+            transition: top 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
-        .note.pop { transform: translate(-50%, -50%) rotate(-15deg) scale(1.6); }
 
         .ledger-line {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(15deg);
-            width: 44px;
-            height: 3px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px; height: 3px;
             background-color: var(--staff-lines);
             display: none;
-            z-index: -1;
         }
 
-        /* --- UI DE CONTROLES --- */
         .controls {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 12px;
             margin-bottom: 1.5rem;
-            padding: 0 10px;
         }
 
-        .tools {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 600px) {
-            .controls { grid-template-columns: repeat(4, 1fr); }
-            .note { left: 160px; }
-            .staff-lines { width: 95%; }
-            h1.mario-title { font-size: 3rem; }
-        }
-
-        .btn-note, .btn-tool {
+        .btn-note {
             font-family: 'Fredoka', sans-serif;
-            padding: 18px 10px;
-            font-size: 1.4rem;
-            font-weight: 700;
-            background-color: var(--accent); 
+            padding: 15px 5px;
+            font-size: 1.2rem;
+            background-color: var(--accent);
             color: white;
-            border: 3px solid #000; 
-            border-radius: 50px; 
+            border: 3px solid #000;
+            border-radius: 50px;
             cursor: pointer;
-            position: relative;
-            top: 0;
-            transition: all 0.1s;
-            text-shadow: 1px 1px 0 #000;
-            box-shadow: 0 6px 0px #000;
+            box-shadow: 0 4px 0 #000;
         }
 
-        .btn-tool { background-color: var(--guide); padding: 12px 25px; font-size: 1.2rem; }
-        .btn-note:hover:not(:disabled), .btn-tool:hover:not(:disabled) { filter: brightness(1.1); }
-        .btn-note:active:not(:disabled), .btn-tool:active:not(:disabled) { top: 6px; box-shadow: 0 0px 0px #000; }
-        .btn-note:disabled, .btn-tool:disabled { cursor: not-allowed; opacity: 0.8; }
-        
-        .btn-note.correct { background-color: var(--success); border-color: #000; color: white; }
-        .btn-note.incorrect { background-color: var(--error); border-color: #000; color: white; animation: shake 0.4s; }
+        .btn-note.correct { background-color: var(--success); }
+        .btn-note.incorrect { background-color: var(--error); }
 
-        /* --- FEEDBACK Y PUNTAJE --- */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-        }
-
-        #score, #streak { color: var(--accent); }
-
-        .feedback-msg {
-            height: 35px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            transition: opacity 0.3s;
-            opacity: 0;
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
-        }
-
-        .msg-success { color: var(--success); }
-        .msg-error { color: var(--error); }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-        }
-
-        /* --- MODALES --- */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
+            justify-content: center; align-items: center;
         }
 
         .modal-content {
-            background: #fff;
+            background: white;
             padding: 2rem;
-            border-radius: 24px;
-            border: 6px solid var(--guide);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            position: relative;
-            width: 95%;
-            max-width: 800px;
-            text-align: center;
-            animation: popModal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .minigame-content {
-            border-color: var(--accent);
+            border-radius: 20px;
             max-width: 500px;
+            text-align: center;
         }
 
-        @keyframes popModal {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        .feedback-msg { height: 40px; font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; opacity: 0; transition: 0.3s; }
+        .msg-success { color: var(--success); }
+        .msg-error { color: var(--error); }
 
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2rem;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .close-btn:hover { color: var(--error); }
-
-        .guide-staff-wrapper {
-            margin: 1.5rem auto;
-            position: relative;
-            height: 200px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fdfaf6;
-            border-radius: 15px;
-            border: 3px dashed #ccc;
-            overflow: hidden; 
-        }
-
-        .g-note {
-            position: absolute;
-            width: 24px;
-            height: 18px;
-            background-color: #000;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-        }
-
-        .g-note-name {
-            position: absolute;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%) rotate(15deg);
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: 14px;
-            color: var(--accent);
-        }
-
-        .credito-profesor {
-            margin-top: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: #546e7a;
-            padding-bottom: 0.5rem;
-        }
-        
-        /* Estilos minijuegos */
-        .mg-btn {
-            font-family: 'Fredoka', sans-serif;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 1.2rem;
-            background: #fff;
-            border: 3px solid var(--primary);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .mg-btn:hover { background: #eee; }
-        .mg-btn:active { transform: scale(0.95); }
+        .mg-btn { padding: 10px 20px; margin: 5px; font-size: 1rem; cursor: pointer; border-radius: 10px; border: 2px solid #000; }
     </style>
 </head>
 <body>
@@ -405,409 +231,168 @@
 
     <div id="start-screen" class="start-screen">
         <h2>Ingresa tu nombre para jugar</h2>
-        <input type="text" id="player-name" placeholder="Tu nombre y apellido..." required autocomplete="off">
+        <input type="text" id="player-name" placeholder="Nombre y Apellido..." required>
         <br>
         <button id="btn-start" class="btn-start">▶ JUGAR ◀</button>
     </div>
 
     <div id="game-area" style="display: none;">
         <div class="staff-container">
-            <div class="staff-lines" id="staff">
-                <div class="clef">𝄞</div>
-                <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> 
+            <div class="staff-lines">
+                <div class="clef"></div>
+                <div class="clef" style="font-family: 'Noto Music';">𝄞</div>
+                <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
                 <div class="note" id="active-note">
                     <div class="ledger-line" id="ledger-line"></div>
                 </div>
             </div>
         </div>
 
-        <div class="feedback-msg" id="feedback">¡Bien hecho!</div>
+        <div class="feedback-msg" id="feedback"></div>
 
         <div class="controls" id="btn-container"></div>
         
-        <div class="tools">
-            <button id="btn-guide" class="btn-tool" onclick="openGuideModal()">📖 Pentagrama Guía</button>
-        </div>
-
         <div class="stats">
-            <div>💰 Puntuación: <span id="score">0</span></div>
-            <div>🔥 Racha: <span id="streak">0</span></div>
+            <div>💰 Puntos: <span id="score">0</span> | 🔥 Racha: <span id="streak">0</span></div>
+            <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Aciertos para sorpresa: <span id="correct-count">0</span>/20</div>
         </div>
-        <div style="font-size: 1rem; color: #888; font-weight: bold; margin-top: 10px;">Aciertos: <span id="correct-count">0</span> / 20 para Sorpresa</div>
     </div>
 
-    <div class="credito-profesor">
-        Creado por Profesor Matías Poblete
-    </div>
-</div>
-
-<div id="guide-modal" class="modal-overlay">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeGuideModal()">✖</span>
-        <h2 style="font-family: 'Fredoka'; color: var(--guide); font-size: 2.2rem; margin-bottom: 5px;">Mapa de Notas</h2>
-        <p style="font-size: 1.1rem; color: #555; margin-bottom: 10px;">Estudia bien la ubicación de cada nota antes de continuar.</p>
-        
-        <div class="guide-staff-wrapper">
-            <div class="staff-lines" style="width: 95%; transform: scale(0.8); transform-origin: center;">
-                <div class="clef">𝄞</div>
-                <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> <div class="line"></div> 
-                
-                <div class="g-note" style="left: 14%; top: 150px;"><div class="ledger-line" style="display:block;"></div><div class="g-note-name">DO</div></div>
-                <div class="g-note" style="left: 21%; top: 135px;"><div class="g-note-name">RE</div></div>
-                <div class="g-note" style="left: 28%; top: 120px;"><div class="g-note-name">MI</div></div>
-                <div class="g-note" style="left: 35%; top: 105px;"><div class="g-note-name">FA</div></div>
-                <div class="g-note" style="left: 42%; top: 90px;"><div class="g-note-name">SOL</div></div>
-                <div class="g-note" style="left: 49%; top: 75px;"><div class="g-note-name">LA</div></div>
-                <div class="g-note" style="left: 56%; top: 60px;"><div class="g-note-name">SI</div></div>
-                <div class="g-note" style="left: 63%; top: 45px;"><div class="g-note-name">DO</div></div>
-                <div class="g-note" style="left: 70%; top: 30px;"><div class="g-note-name">RE</div></div>
-                <div class="g-note" style="left: 77%; top: 15px;"><div class="g-note-name">MI</div></div>
-                <div class="g-note" style="left: 84%; top: 0px;"><div class="g-note-name">FA</div></div>
-                <div class="g-note" style="left: 91%; top: -15px;"><div class="g-note-name">SOL</div></div>
-            </div>
-        </div>
-        
-        <button class="btn-start" onclick="closeGuideModal()" style="font-size: 1.2rem; padding: 12px 25px; background-color: var(--success);">¡Listo, a jugar!</button>
-    </div>
+    <div style="margin-top: 20px; font-weight: bold; color: #777;">Creado por Profesor Matías Poblete</div>
 </div>
 
 <div id="minigame-modal" class="modal-overlay">
-    <div class="modal-content minigame-content" id="mg-container">
-        </div>
+    <div class="modal-content" id="mg-container"></div>
 </div>
 
 <script>
-    // --- LÓGICA DE FORMSUBMIT ---
+    const GMAIL_URL = "https://formsubmit.co/ajax/matiaspobletefuenzalida@gmail.com";
+    
     const startScreen = document.getElementById('start-screen');
     const gameArea = document.getElementById('game-area');
     const btnStart = document.getElementById('btn-start');
     const playerNameInput = document.getElementById('player-name');
 
+    // --- LOGICA ENVÍO DE DATOS ---
     btnStart.addEventListener('click', () => {
         const playerName = playerNameInput.value.trim();
-        
-        if (!playerName) {
-            alert("¡Por favor, escribe tu nombre para comenzar la misión!");
-            return;
-        }
+        if (!playerName) { alert("Escribe tu nombre"); return; }
 
-        btnStart.textContent = "Preparando nivel...";
+        btnStart.textContent = "Cargando...";
         btnStart.disabled = true;
 
-        fetch("https://formsubmit.co/ajax/matiaspobletefuenzalida@gmail.com", {
+        fetch(GMAIL_URL, {
             method: "POST",
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
-                _subject: `Nuevo Jugador: ${playerName}`,
-                Mensaje: `¡El alumno ${playerName} acaba de entrar a jugar Super Pentagrama!`,
-                NombreDelJugador: playerName
+                Estudiante: playerName,
+                Evento: "Inicio de Juego",
+                _subject: `🎮 Nuevo Jugador: ${playerName}`
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            startScreen.style.display = 'none';
-            gameArea.style.display = 'block';
-            initGame();
-        })
-        .catch(error => {
-            console.error("Error al enviar el correo", error);
+        .finally(() => {
+            // Siempre iniciamos el juego aunque el correo falle (para no trabar la clase)
             startScreen.style.display = 'none';
             gameArea.style.display = 'block';
             initGame();
         });
     });
 
-
-    // --- LÓGICA DEL JUEGO PRINCIPAL ---
+    // --- LÓGICA DEL JUEGO ---
     const MUSIC_DATA = [
-        { name: 'DO', top: 150, needsLedger: true },  
-        { name: 'RE', top: 135, needsLedger: false }, 
-        { name: 'MI', top: 120, needsLedger: false }, 
-        { name: 'FA', top: 105, needsLedger: false }, 
-        { name: 'SOL', top: 90, needsLedger: false }, 
-        { name: 'LA', top: 75, needsLedger: false },  
-        { name: 'SI', top: 60, needsLedger: false },  
-        { name: 'DO', top: 45, needsLedger: false },  
-        { name: 'RE', top: 30, needsLedger: false },  
-        { name: 'MI', top: 15, needsLedger: false },  
-        { name: 'FA', top: 0, needsLedger: false },   
-        { name: 'SOL', top: -15, needsLedger: false } 
+        { name: 'DO', top: 150, needsLedger: true }, { name: 'RE', top: 135, needsLedger: false },
+        { name: 'MI', top: 120, needsLedger: false }, { name: 'FA', top: 105, needsLedger: false },
+        { name: 'SOL', top: 90, needsLedger: false }, { name: 'LA', top: 75, needsLedger: false },
+        { name: 'SI', top: 60, needsLedger: false }, { name: 'DO', top: 45, needsLedger: false },
+        { name: 'RE', top: 30, needsLedger: false }, { name: 'MI', top: 15, needsLedger: false },
+        { name: 'FA', top: 0, needsLedger: false }, { name: 'SOL', top: -15, needsLedger: false }
     ];
 
-    const UI = {
-        noteEl: document.getElementById('active-note'),
-        ledgerEl: document.getElementById('ledger-line'),
-        btnContainer: document.getElementById('btn-container'),
-        feedback: document.getElementById('feedback'),
-        score: document.getElementById('score'),
-        streak: document.getElementById('streak'),
-        correctCount: document.getElementById('correct-count'),
-        btnGuide: document.getElementById('btn-guide'),
-        modal: document.getElementById('guide-modal'),
-        mgModal: document.getElementById('minigame-modal'),
-        mgContainer: document.getElementById('mg-container')
-    };
-
-    let state = {
-        currentNote: null,
-        score: 0,
-        streak: 0,
-        correctAnswers: 0, // Nuevo contador para los minijuegos
-        isLocked: false,
-        noteCount: 0,
-        focusNotes: []
-    };
+    let state = { score: 0, streak: 0, correctAnswers: 0, currentNote: null, isLocked: false };
 
     function initGame() {
-        const notasUnicas = ['DO', 'RE', 'MI', 'FA', 'SOL', 'LA', 'SI'];
-        
-        UI.btnContainer.innerHTML = ''; 
-        notasUnicas.forEach(nota => {
-            const btn = document.createElement('button');
-            btn.className = 'btn-note';
-            btn.textContent = nota;
-            btn.dataset.note = nota;
-            btn.onclick = () => handleGuess(nota, btn);
-            UI.btnContainer.appendChild(btn);
+        const notas = ['DO', 'RE', 'MI', 'FA', 'SOL', 'LA', 'SI'];
+        const container = document.getElementById('btn-container');
+        container.innerHTML = '';
+        notas.forEach(n => {
+            const b = document.createElement('button');
+            b.className = 'btn-note'; b.textContent = n; b.dataset.note = n;
+            b.onclick = () => handleGuess(n, b);
+            container.appendChild(b);
         });
-
         generateNextNote();
-    }
-
-    function updateFocusNotes() {
-        let shuffled = [...MUSIC_DATA].sort(() => 0.5 - Math.random());
-        state.focusNotes = shuffled.slice(0, 2);
     }
 
     function generateNextNote() {
-        if (state.noteCount > 0 && state.noteCount % 10 === 0) {
-            updateFocusNotes();
-        }
-        state.noteCount++;
-
-        let nextNote;
-        let rand = Math.random();
-
-        if (state.currentNote && rand < 0.30) {
-            nextNote = state.currentNote;
-        } else if (rand < 0.70 && state.focusNotes.length > 0) {
-            nextNote = state.focusNotes[Math.floor(Math.random() * state.focusNotes.length)];
-        } else {
-            nextNote = MUSIC_DATA[Math.floor(Math.random() * MUSIC_DATA.length)];
-        }
-
-        if (state.currentNote && nextNote.top === state.currentNote.top) {
-            UI.noteEl.classList.add('pop');
-            setTimeout(() => UI.noteEl.classList.remove('pop'), 200);
-        }
-
-        state.currentNote = nextNote;
-
-        UI.noteEl.style.top = `${nextNote.top}px`;
-        UI.ledgerEl.style.display = nextNote.needsLedger ? 'block' : 'none';
-        
+        state.currentNote = MUSIC_DATA[Math.floor(Math.random() * MUSIC_DATA.length)];
+        document.getElementById('active-note').style.top = `${state.currentNote.top}px`;
+        document.getElementById('ledger-line').style.display = state.currentNote.needsLedger ? 'block' : 'none';
         state.isLocked = false;
-        resetButtons();
+        resetBtns();
     }
 
-    function handleGuess(guessName, btnElement) {
+    function handleGuess(guess, btn) {
         if (state.isLocked) return;
-        state.isLocked = true; 
+        state.isLocked = true;
+        const correct = guess === state.currentNote.name;
 
-        const isCorrect = (guessName === state.currentNote.name);
-
-        if (isCorrect) {
-            state.score += 10;
-            state.streak += 1;
-            state.correctAnswers += 1; 
-            btnElement.classList.add('correct');
+        if (correct) {
+            state.score += 10; state.streak++; state.correctAnswers++;
+            btn.classList.add('correct');
             showFeedback(true);
         } else {
             state.streak = 0;
-            btnElement.classList.add('incorrect');
-            
-            const correctBtn = document.querySelector(`button[data-note="${state.currentNote.name}"]`);
-            if (correctBtn) correctBtn.classList.add('correct');
-            
+            btn.classList.add('incorrect');
             showFeedback(false);
         }
 
-        UI.score.textContent = state.score;
-        UI.streak.textContent = state.streak;
-        // Actualizamos la vista del contador hacia los 20
-        UI.correctCount.textContent = state.correctAnswers % 20;
+        document.getElementById('score').textContent = state.score;
+        document.getElementById('streak').textContent = state.streak;
+        document.getElementById('correct-count').textContent = state.correctAnswers % 20;
 
         setTimeout(() => {
-            UI.feedback.style.opacity = '0';
-            
-            // VERIFICAR SI TOCA MINIJUEGO (cada 20 aciertos correctos)
-            if (isCorrect && state.correctAnswers > 0 && state.correctAnswers % 20 === 0) {
-                launchRandomMiniGame();
+            if (correct && state.correctAnswers > 0 && state.correctAnswers % 20 === 0) {
+                launchMiniGame();
             } else {
                 generateNextNote();
             }
-        }, 1500);
+        }, 1200);
     }
 
-    function showFeedback(isSuccess) {
-        const msgsSuccess = ["¡Perfecto! ✨", "¡Exacto! ⭐", "¡Muy bien! 🍄", "¡Excelente oído! 🔥"];
-        const msgsError = [`¡Casi! Era ${state.currentNote.name} 😢`, `Revisa bien, era ${state.currentNote.name} 🧐`, `¡Atento! Esa nota es ${state.currentNote.name} 🍄`];
+    function showFeedback(ok) {
+        const f = document.getElementById('feedback');
+        f.textContent = ok ? "¡Excelente! 🌟" : `Era ${state.currentNote.name} 🍄`;
+        f.className = `feedback-msg ${ok ? 'msg-success' : 'msg-error'}`;
+        f.style.opacity = 1;
+        setTimeout(() => f.style.opacity = 0, 1000);
+    }
+
+    function resetBtns() {
+        document.querySelectorAll('.btn-note').forEach(b => b.classList.remove('correct', 'incorrect'));
+    }
+
+    // --- MINIJUEGOS ---
+    function launchMiniGame() {
+        const modal = document.getElementById('minigame-modal');
+        const container = document.getElementById('mg-container');
+        modal.style.display = 'flex';
         
-        const arr = isSuccess ? msgsSuccess : msgsError;
-        UI.feedback.textContent = arr[Math.floor(Math.random() * arr.length)];
-        
-        UI.feedback.className = 'feedback-msg ' + (isSuccess ? 'msg-success' : 'msg-error');
-        UI.feedback.style.opacity = '1';
+        container.innerHTML = `
+            <h2>🎁 ¡SORPRESA!</h2>
+            <p>Elige un cofre para ganar puntos extra:</p>
+            <button class="mg-btn" onclick="endMG(50)">📦</button>
+            <button class="mg-btn" onclick="endMG(100)">📦</button>
+            <button class="mg-btn" onclick="endMG(20)">📦</button>
+        `;
     }
 
-    function resetButtons() {
-        const btns = document.querySelectorAll('.btn-note');
-        btns.forEach(btn => {
-            btn.classList.remove('correct', 'incorrect');
-        });
-    }
-
-    // --- FUNCIONES DEL MODAL DE GUÍA ---
-    function openGuideModal() {
-        if (state.isLocked) return; 
-        UI.modal.style.display = 'flex';
-    }
-
-    function closeGuideModal() {
-        UI.modal.style.display = 'none';
-    }
-
-    // ==========================================
-    // --- LÓGICA DE MINIJUEGOS (BREAKS) --------
-    // ==========================================
-    let reflexTimer = null;
-
-    function launchRandomMiniGame() {
-        UI.mgModal.style.display = 'flex';
-        const games = [mgChampiñon, mgCofres, mgAcertijo, mgReflejos, mgTrivia];
-        const randomGame = games[Math.floor(Math.random() * games.length)];
-        randomGame(); // Ejecutar el minijuego
-    }
-
-    function endMiniGame(won, points) {
-        clearTimeout(reflexTimer); // Por si venimos del juego de reflejos
-        if (won) {
-            state.score += points;
-            UI.score.textContent = state.score;
-            UI.mgContainer.innerHTML = `
-                <h2 style="font-family:'Fredoka'; color:var(--success); font-size:2.5rem;">¡GANASTE! 🎉</h2>
-                <p style="font-size:1.3rem; margin:15px 0;">Has conseguido <strong>+${points} Puntos extra</strong>.</p>
-                <button class="btn-start" onclick="resumeMainGame()">Volver a la Misión</button>
-            `;
-        } else {
-            UI.mgContainer.innerHTML = `
-                <h2 style="font-family:'Fredoka'; color:var(--error); font-size:2.5rem;">¡Oh no! 😢</h2>
-                <p style="font-size:1.3rem; margin:15px 0;">No hubo suerte esta vez. ¡Sigue practicando!</p>
-                <button class="btn-start" onclick="resumeMainGame()">Volver a la Misión</button>
-            `;
-        }
-    }
-
-    function resumeMainGame() {
-        UI.mgModal.style.display = 'none';
+    window.endMG = (pts) => {
+        state.score += pts;
+        document.getElementById('score').textContent = state.score;
+        document.getElementById('minigame-modal').style.display = 'none';
         generateNextNote();
-    }
-
-    // Minijuego 1: Champiñón Escurridizo
-    function mgChampiñon() {
-        UI.mgContainer.innerHTML = `
-            <h2 style="font-family:'Fredoka'; color:var(--accent);">¡Atrapa el Champiñón!</h2>
-            <p>Haz clic en el champiñón antes de que se escape para ganar puntos extra.</p>
-            <div id="mg-area" style="position:relative; height:180px; width:100%; border:2px dashed #ccc; margin:15px 0; border-radius:10px; overflow:hidden;">
-                <button id="shroom-btn" style="position:absolute; font-size:3rem; cursor:pointer; background:none; border:none; top:50px; left:40%; transition:0.2s;" 
-                    onmouseover="moveShroom(this)" onclick="endMiniGame(true, 50)">🍄</button>
-            </div>
-        `;
-    }
-    window.moveShroom = function(btn) {
-        btn.style.top = Math.random() * 120 + 'px';
-        btn.style.left = Math.random() * 80 + '%';
-    }
-
-    // Minijuego 2: Cofres de la Suerte
-    function mgCofres() {
-        UI.mgContainer.innerHTML = `
-            <h2 style="font-family:'Fredoka'; color:var(--accent);">🎁 Cofre de la Suerte</h2>
-            <p>Adivina en qué cofre está la estrella dorada.</p>
-            <div style="display:flex; justify-content:center; gap:15px; margin:20px 0;">
-                <button class="mg-btn" onclick="checkChest(0)" style="font-size:3.5rem; padding:10px 20px;">📦</button>
-                <button class="mg-btn" onclick="checkChest(1)" style="font-size:3.5rem; padding:10px 20px;">📦</button>
-                <button class="mg-btn" onclick="checkChest(2)" style="font-size:3.5rem; padding:10px 20px;">📦</button>
-            </div>
-        `;
-        // Guardamos la respuesta correcta en el contenedor (oculta)
-        window.winningChest = Math.floor(Math.random() * 3);
-    }
-    window.checkChest = function(choice) {
-        if (choice === window.winningChest) {
-            endMiniGame(true, 50);
-        } else {
-            endMiniGame(false, 0);
-        }
-    }
-
-    // Minijuego 3: Acertijo Musical
-    function mgAcertijo() {
-        UI.mgContainer.innerHTML = `
-            <h2 style="font-family:'Fredoka'; color:var(--accent);">🎵 Acertijo Musical</h2>
-            <p style="font-size:1.3rem; margin:15px 0;"><strong>¿Cuántas líneas tiene un pentagrama?</strong></p>
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <button class="mg-btn" onclick="endMiniGame(false, 0)">4 Líneas</button>
-                <button class="mg-btn" onclick="endMiniGame(true, 50)">5 Líneas</button>
-                <button class="mg-btn" onclick="endMiniGame(false, 0)">6 Líneas</button>
-            </div>
-        `;
-    }
-
-    // Minijuego 4: Reflejos de Luigi
-    let isGreen = false;
-    function mgReflejos() {
-        isGreen = false;
-        UI.mgContainer.innerHTML = `
-            <h2 style="font-family:'Fredoka'; color:var(--accent);">🟢 Reflejos Veloces</h2>
-            <p>Espera a que el botón rojo se ponga <b>VERDE</b> y haz clic lo más rápido posible. ¡Si haces clic en rojo, pierdes!</p>
-            <button id="reflex-btn" style="background-color:var(--error); color:white; font-family:'Fredoka'; font-size:1.5rem; width:150px; height:150px; border-radius:50%; border:5px solid #000; margin:20px auto; cursor:pointer; box-shadow:0 6px 0 #000;" 
-                onclick="checkReflex()">¡ESPERA!</button>
-        `;
-        
-        const delay = Math.floor(Math.random() * 3000) + 1500; // Entre 1.5 y 4.5 segundos
-        reflexTimer = setTimeout(() => {
-            isGreen = true;
-            const btn = document.getElementById('reflex-btn');
-            if(btn) {
-                btn.style.backgroundColor = 'var(--success)';
-                btn.innerText = '¡AHORA!';
-            }
-        }, delay);
-    }
-    window.checkReflex = function() {
-        if (isGreen) {
-            endMiniGame(true, 60); // Da más puntos porque es más difícil
-        } else {
-            endMiniGame(false, 0);
-        }
-    }
-
-    // Minijuego 5: Trivia Mario
-    function mgTrivia() {
-        UI.mgContainer.innerHTML = `
-            <h2 style="font-family:'Fredoka'; color:var(--accent);">❓ Trivia</h2>
-            <p style="font-size:1.3rem; margin:15px 0;"><strong>¿De qué color es la gorra del hermano de Mario (Luigi)?</strong></p>
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <button class="mg-btn" onclick="endMiniGame(false, 0)">Roja</button>
-                <button class="mg-btn" onclick="endMiniGame(false, 0)">Azul</button>
-                <button class="mg-btn" onclick="endMiniGame(true, 50)">Verde</button>
-            </div>
-        `;
-    }
+    };
 </script>
+
 </body>
 </html>
