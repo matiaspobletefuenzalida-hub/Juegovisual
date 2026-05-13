@@ -13,11 +13,10 @@
             --surface: #ffffff;
             --text-main: #2c3e50;
             --primary: #2c3e50;
-            --accent: #049CD8;   /* Azul Mario */
-            --accent-hover: #0082c3;
-            --success: #43B047;  /* Verde Mario */
-            --error: #E52521;    /* Rojo Mario */
-            --guide: #FF9800;    /* Naranja Guía */
+            --accent: #049CD8;
+            --success: #43B047;
+            --error: #E52521;
+            --guide: #FF9800;
             --staff-lines: #000000;
         }
 
@@ -56,168 +55,48 @@
             font-weight: 900; 
             font-size: 4.2rem; 
             margin-bottom: 0.5rem; 
-            letter-spacing: 2px;
-            line-height: 1.1;
-            text-shadow: 
-                -4px -4px 0 #000,  
-                 4px -4px 0 #000,
-                -4px  4px 0 #000,
-                 4px  4px 0 #000,
-                 0px  6px 0 #000,
-                 0px 15px 10px rgba(0,0,0,0.3);
+            text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000, 4px 4px 0 #000, 0px 6px 0 #000;
         }
 
-        .mario-title span { display: inline-block; }
-        .mario-title span:nth-child(even) { transform: rotate(3deg) translateY(-3px); }
-        .mario-title span:nth-child(odd) { transform: rotate(-3deg) translateY(3px); }
+        .m-red { color: #E52521; } .m-blue { color: #049CD8; } .m-yellow { color: #FBD000; } .m-green { color: #43B047; }
 
-        .m-red { color: #E52521; }
-        .m-blue { color: #049CD8; }
-        .m-yellow { color: #FBD000; }
-        .m-green { color: #43B047; }
+        p.subtitle { font-weight: 900; color: #546e7a; margin-bottom: 2.5rem; font-size: 1.3rem; }
 
-        p.subtitle { 
-            font-weight: 900;
-            color: #546e7a; 
-            margin-top: 10px;
-            margin-bottom: 2.5rem; 
-            font-size: 1.3rem; 
-        }
-
-        .start-screen {
-            background: #f8f9fa;
-            border: 4px dashed #049CD8;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .start-screen input {
-            font-family: 'Nunito', sans-serif;
-            font-size: 1.2rem;
-            padding: 10px 15px;
-            width: 80%;
-            max-width: 300px;
-            border: 3px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            outline: none;
-        }
+        .start-screen { background: #f8f9fa; border: 4px dashed #049CD8; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .start-screen input { font-size: 1.2rem; padding: 10px; width: 80%; border-radius: 8px; border: 3px solid #ccc; margin-bottom: 15px; }
 
         .btn-start {
             font-family: 'Fredoka', sans-serif;
-            padding: 15px 30px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background-color: var(--success); 
-            color: white;
-            border: 3px solid #000; 
-            border-radius: 50px; 
-            cursor: pointer;
-            position: relative;
-            top: 0;
-            transition: all 0.1s;
-            text-shadow: 1px 1px 0 #000;
+            padding: 15px 30px; font-size: 1.5rem; background-color: var(--success); 
+            color: white; border: 3px solid #000; border-radius: 50px; cursor: pointer;
             box-shadow: 0 6px 0px #000;
         }
 
-        .btn-start:active:not(:disabled) { top: 6px; box-shadow: 0 0px 0px #000; }
+        .staff-container { position: relative; width: 100%; height: 200px; margin-bottom: 3rem; display: flex; justify-content: center; align-items: center; }
+        .staff-lines { position: relative; width: 80%; height: 120px; display: flex; flex-direction: column; justify-content: space-between; }
+        .line { width: 100%; height: 3px; background-color: var(--staff-lines); }
 
-        .staff-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .staff-lines {
-            position: relative;
-            width: 80%;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .line { width: 100%; height: 3px; background-color: var(--staff-lines); z-index: 1; }
-
-        .clef {
-            position: absolute;
-            font-family: 'Noto Music', sans-serif;
-            font-size: 110px;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 2;
-        }
+        .clef { position: absolute; font-family: 'Noto Music'; font-size: 110px; left: 10px; top: 50%; transform: translateY(-50%); }
 
         .note {
-            position: absolute;
-            left: 220px;
-            width: 28px; height: 22px;
-            background-color: #000;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            z-index: 3;
-            transition: top 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: absolute; left: 220px; width: 28px; height: 22px;
+            background-color: #000; border-radius: 50%; transform: translate(-50%, -50%) rotate(-15deg);
         }
 
-        .ledger-line {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 44px; height: 3px;
-            background-color: var(--staff-lines);
-            display: none;
-        }
+        .ledger-line { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 3px; background-color: #000; }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-note {
-            font-family: 'Fredoka', sans-serif;
-            padding: 15px 5px;
-            font-size: 1.2rem;
-            background-color: var(--accent);
-            color: white;
-            border: 3px solid #000;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #000;
-        }
-
+        .controls { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+        .btn-note { font-family: 'Fredoka'; padding: 15px 5px; font-size: 1.2rem; background-color: var(--accent); color: white; border: 3px solid #000; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 0 #000; }
         .btn-note.correct { background-color: var(--success); }
         .btn-note.incorrect { background-color: var(--error); }
 
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center; align-items: center;
-        }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 650px; width: 95%; text-align: center; }
 
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 500px;
-            text-align: center;
-        }
+        .btn-guide { background-color: var(--guide); color: white; padding: 10px 20px; border-radius: 12px; border: 2px solid #000; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 0 #000; }
 
-        .feedback-msg { height: 40px; font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; opacity: 0; transition: 0.3s; }
-        .msg-success { color: var(--success); }
-        .msg-error { color: var(--error); }
-
-        .mg-btn { padding: 10px 20px; margin: 5px; font-size: 1rem; cursor: pointer; border-radius: 10px; border: 2px solid #000; }
+        .feedback-msg { height: 40px; font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; opacity: 0; }
+        .msg-success { color: var(--success); } .msg-error { color: var(--error); }
     </style>
 </head>
 <body>
@@ -237,10 +116,11 @@
     </div>
 
     <div id="game-area" style="display: none;">
+        <button class="btn-guide" onclick="showGuide()">📖 CONSULTAR GUÍA</button>
+        
         <div class="staff-container">
             <div class="staff-lines">
-                <div class="clef"></div>
-                <div class="clef" style="font-family: 'Noto Music';">𝄞</div>
+                <div class="clef">𝄞</div>
                 <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
                 <div class="note" id="active-note">
                     <div class="ledger-line" id="ledger-line"></div>
@@ -249,7 +129,6 @@
         </div>
 
         <div class="feedback-msg" id="feedback"></div>
-
         <div class="controls" id="btn-container"></div>
         
         <div class="stats">
@@ -257,7 +136,6 @@
             <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Aciertos para sorpresa: <span id="correct-count">0</span>/20</div>
         </div>
     </div>
-
     <div style="margin-top: 20px; font-weight: bold; color: #777;">Creado por Profesor Matías Poblete</div>
 </div>
 
@@ -267,38 +145,28 @@
 
 <script>
     const GMAIL_URL = "https://formsubmit.co/ajax/matiaspobletefuenzalida@gmail.com";
-    
     const startScreen = document.getElementById('start-screen');
     const gameArea = document.getElementById('game-area');
     const btnStart = document.getElementById('btn-start');
     const playerNameInput = document.getElementById('player-name');
 
-    // --- LOGICA ENVÍO DE DATOS ---
     btnStart.addEventListener('click', () => {
         const playerName = playerNameInput.value.trim();
         if (!playerName) { alert("Escribe tu nombre"); return; }
-
         btnStart.textContent = "Cargando...";
         btnStart.disabled = true;
 
         fetch(GMAIL_URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-                Estudiante: playerName,
-                Evento: "Inicio de Juego",
-                _subject: `🎮 Nuevo Jugador: ${playerName}`
-            })
-        })
-        .finally(() => {
-            // Siempre iniciamos el juego aunque el correo falle (para no trabar la clase)
+            body: JSON.stringify({ Estudiante: playerName, Evento: "Inicio", _subject: `🎮 Nuevo Jugador: ${playerName}` })
+        }).finally(() => {
             startScreen.style.display = 'none';
             gameArea.style.display = 'block';
             initGame();
         });
     });
 
-    // --- LÓGICA DEL JUEGO ---
     const MUSIC_DATA = [
         { name: 'DO', top: 150, needsLedger: true }, { name: 'RE', top: 135, needsLedger: false },
         { name: 'MI', top: 120, needsLedger: false }, { name: 'FA', top: 105, needsLedger: false },
@@ -316,7 +184,7 @@
         container.innerHTML = '';
         notas.forEach(n => {
             const b = document.createElement('button');
-            b.className = 'btn-note'; b.textContent = n; b.dataset.note = n;
+            b.className = 'btn-note'; b.textContent = n;
             b.onclick = () => handleGuess(n, b);
             container.appendChild(b);
         });
@@ -335,64 +203,71 @@
         if (state.isLocked) return;
         state.isLocked = true;
         const correct = guess === state.currentNote.name;
-
         if (correct) {
             state.score += 10; state.streak++; state.correctAnswers++;
-            btn.classList.add('correct');
-            showFeedback(true);
+            btn.classList.add('correct'); showFeedback(true);
         } else {
-            state.streak = 0;
-            btn.classList.add('incorrect');
-            showFeedback(false);
+            state.streak = 0; btn.classList.add('incorrect'); showFeedback(false);
         }
-
         document.getElementById('score').textContent = state.score;
         document.getElementById('streak').textContent = state.streak;
         document.getElementById('correct-count').textContent = state.correctAnswers % 20;
-
-        setTimeout(() => {
-            if (correct && state.correctAnswers > 0 && state.correctAnswers % 20 === 0) {
-                launchMiniGame();
-            } else {
-                generateNextNote();
-            }
-        }, 1200);
+        setTimeout(() => { (correct && state.correctAnswers % 20 === 0) ? launchMiniGame() : generateNextNote(); }, 1200);
     }
 
     function showFeedback(ok) {
         const f = document.getElementById('feedback');
         f.textContent = ok ? "¡Excelente! 🌟" : `Era ${state.currentNote.name} 🍄`;
         f.className = `feedback-msg ${ok ? 'msg-success' : 'msg-error'}`;
-        f.style.opacity = 1;
-        setTimeout(() => f.style.opacity = 0, 1000);
+        f.style.opacity = 1; setTimeout(() => f.style.opacity = 0, 1000);
     }
 
-    function resetBtns() {
-        document.querySelectorAll('.btn-note').forEach(b => b.classList.remove('correct', 'incorrect'));
+    function resetBtns() { document.querySelectorAll('.btn-note').forEach(b => b.classList.remove('correct', 'incorrect')); }
+
+    function showGuide() {
+        const modal = document.getElementById('minigame-modal');
+        const container = document.getElementById('mg-container');
+        modal.style.display = 'flex';
+        container.innerHTML = `
+            <h2 style="color: var(--accent); margin-bottom:10px;">📖 Guía de Referencia</h2>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 12px; border: 2px solid #ddd;">
+                <svg viewBox="0 -30 500 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%;">
+                    <line x1="10" y1="30" x2="490" y2="30" stroke="black" stroke-width="2"/>
+                    <line x1="10" y1="50" x2="490" y2="50" stroke="black" stroke-width="2"/>
+                    <line x1="10" y1="70" x2="490" y2="70" stroke="black" stroke-width="2"/>
+                    <line x1="10" y1="90" x2="490" y2="90" stroke="black" stroke-width="2"/>
+                    <line x1="10" y1="110" x2="490" y2="110" stroke="black" stroke-width="2"/>
+                    <text x="15" y="95" font-size="70" font-family="Noto Music">𝄞</text>
+                    <circle cx="80" cy="125" r="8"/> <line x1="68" y1="125" x2="92" y2="125" stroke="black" stroke-width="2"/> <text x="70" y="145" font-size="12" font-weight="bold">DO</text>
+                    <circle cx="115" cy="118" r="8"/> <text x="105" y="145" font-size="12" font-weight="bold">RE</text>
+                    <circle cx="150" cy="110" r="8"/> <text x="140" y="145" font-size="12" font-weight="bold">MI</text>
+                    <circle cx="185" cy="100" r="8"/> <text x="175" y="145" font-size="12" font-weight="bold">FA</text>
+                    <circle cx="220" cy="90" r="8"/> <text x="210" y="145" font-size="12" font-weight="bold">SOL</text>
+                    <circle cx="255" cy="80" r="8"/> <text x="245" y="145" font-size="12" font-weight="bold">LA</text>
+                    <circle cx="290" cy="70" r="8"/> <text x="280" y="145" font-size="12" font-weight="bold">SI</text>
+                    <circle cx="325" cy="60" r="8"/> <text x="315" y="145" font-size="12" font-weight="bold">DO</text>
+                    <circle cx="360" cy="50" r="8"/> <text x="350" y="145" font-size="12" font-weight="bold">RE</text>
+                    <circle cx="395" cy="40" r="8"/> <text x="385" y="145" font-size="12" font-weight="bold">MI</text>
+                    <circle cx="430" cy="30" r="8"/> <text x="420" y="145" font-size="12" font-weight="bold">FA</text>
+                    <circle cx="465" cy="20" r="8"/> <text x="455" y="145" font-size="12" font-weight="bold">SOL</text>
+                </svg>
+            </div>
+            <br><button class="btn-start" style="font-size: 1.1rem; padding: 10px 25px;" onclick="document.getElementById('minigame-modal').style.display='none'">VOLVER AL JUEGO</button>
+        `;
     }
 
-    // --- MINIJUEGOS ---
     function launchMiniGame() {
         const modal = document.getElementById('minigame-modal');
         const container = document.getElementById('mg-container');
         modal.style.display = 'flex';
-        
-        container.innerHTML = `
-            <h2>🎁 ¡SORPRESA!</h2>
-            <p>Elige un cofre para ganar puntos extra:</p>
-            <button class="mg-btn" onclick="endMG(50)">📦</button>
-            <button class="mg-btn" onclick="endMG(100)">📦</button>
-            <button class="mg-btn" onclick="endMG(20)">📦</button>
-        `;
+        container.innerHTML = `<h2>🎁 ¡SORPRESA!</h2><p>Elige un cofre:</p>
+            <button class="mg-btn" onclick="endMG(50)">📦</button><button class="mg-btn" onclick="endMG(100)">📦</button><button class="mg-btn" onclick="endMG(20)">📦</button>`;
     }
 
     window.endMG = (pts) => {
-        state.score += pts;
-        document.getElementById('score').textContent = state.score;
-        document.getElementById('minigame-modal').style.display = 'none';
-        generateNextNote();
+        state.score += pts; document.getElementById('score').textContent = state.score;
+        document.getElementById('minigame-modal').style.display = 'none'; generateNextNote();
     };
 </script>
-
 </body>
 </html>
